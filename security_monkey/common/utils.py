@@ -26,6 +26,7 @@ from security_monkey.datastore import Account
 from flask_mail import Message
 import boto
 import traceback
+import slackweb
 
 prims = [int, str, unicode, bool, float, type(None)]
 
@@ -119,3 +120,8 @@ def add_account(number, third_party, name, s3_name, active, notes, role_name='Se
     db.session.add(account)
     db.session.commit()
     return True
+
+def message_slack(message, channel, username, url):
+    slack = slackweb.Slack(url=url)
+    slack.notify(text=message, channel=channel, username=username, icon_emoji=":"+ username + ":")
+

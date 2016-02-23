@@ -69,3 +69,9 @@ SECURITYGROUP_INSTANCE_DETAIL = 'FULL'
 # You will likely need at least one core thread for every account being monitored.
 CORE_THREADS = 25
 MAX_THREADS = 30
+
+# Slack info
+SLACK_URL = 'https://hooks.slack.com/services/######/######/service_key'
+SLACK_CHANNEL = '#channel'
+SLACK_USERNAME = 'alerter_username'
+

@@ -24,7 +24,7 @@ from security_monkey import app
 from security_monkey.common.jinja import get_jinja_env
 from security_monkey.datastore import User
 from security_monkey.common.utils import send_email
-
+from security_monkey.common.utils import message_slack
 
 def get_subject(has_issues, has_new_issue, has_unjustified_issue, account, watcher_str):
     if has_new_issue:
@@ -90,6 +90,14 @@ class Alerter(object):
             return
 
         app.logger.info("Alerter: Found some changes in {}: {}".format(self.account, watcher_str))
+
+        if app.config.get('SLACK_URL'):
+	    url = app.config.get('SLACK_URL')
+	    message = "Alerter: Found some changes in {}: {}".format(self.account, watcher_str)
+	    channel = app.config.get('SLACK_CHANNEL')
+	    username = app.config.get('SLACK_USERNAME')
+            message_slack(message, channel, username, url)
+
         content = {u'watchers': changed_watchers}
         body = report_content(content)
         subject = get_subject(has_issues, has_new_issue, has_unjustified_issue, self.account, watcher_str)
