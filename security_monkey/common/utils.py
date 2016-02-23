@@ -121,7 +121,7 @@ def add_account(number, third_party, name, s3_name, active, notes, role_name='Se
     db.session.commit()
     return True
 
-def message_slack(message, channel, username, url):
+def message_slack(message, username, url):
     slack = slackweb.Slack(url=url)
-    slack.notify(text=message, channel=channel, username=username, icon_emoji=":"+ username + ":")
+    slack.notify(text=message, username=username, icon_emoji=":"+ username + ":")
 

@@ -94,7 +94,6 @@ class Alerter(object):
         if app.config.get('SLACK_URL'):
 	    url = app.config.get('SLACK_URL')
 	    message = "Alerter: Found some changes in {}: {}".format(self.account, watcher_str)
-	    channel = app.config.get('SLACK_CHANNEL')
 	    username = app.config.get('SLACK_USERNAME')
             message_slack(message, channel, username, url)
 
