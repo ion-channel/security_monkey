@@ -95,7 +95,7 @@ class Alerter(object):
 	    url = app.config.get('SLACK_URL')
 	    message = "Alerter: Found some changes in {}: {}".format(self.account, watcher_str)
 	    username = app.config.get('SLACK_USERNAME')
-            message_slack(message, channel, username, url)
+            message_slack(message, username, url)
 
         content = {u'watchers': changed_watchers}
         body = report_content(content)
